@@ -118,7 +118,7 @@
             function importAttributeOptions(npt, opts, userOptions, dataAttribute) {
                 if (opts.importDataAttributes === true) {
                     var attrOptions = npt.getAttribute(dataAttribute), option, dataoptions, optionData, p;
-                    function importOption(option, optionData) {
+                    var importOption = function (option, optionData) {
                         optionData = optionData !== undefined ? optionData : npt.getAttribute(dataAttribute + "-" + option);
                         if (optionData !== null) {
                             if (typeof optionData === "string") {
@@ -126,7 +126,7 @@
                             }
                             userOptions[option] = optionData;
                         }
-                    }
+                    };
                     if (attrOptions && attrOptions !== "") {
                         attrOptions = attrOptions.replace(/'/g, '"');
                         dataoptions = JSON.parse("{" + attrOptions + "}");
@@ -508,13 +508,13 @@
                     break;
 
                   case opts.alternatormarker:
-                    function groupQuantifier(matches) {
+                    var groupQuantifier = function (matches) {
                         var lastMatch = matches.pop();
                         if (lastMatch.isQuantifier) {
                             lastMatch = groupify([ matches.pop(), lastMatch ]);
                         }
                         return lastMatch;
-                    }
+                    };
                     if (openenings.length > 0) {
                         currentOpeningToken = openenings[openenings.length - 1];
                         var subToken = currentOpeningToken.matches[currentOpeningToken.matches.length - 1];
